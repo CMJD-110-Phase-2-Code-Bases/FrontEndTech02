@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <h1>{myName}</h1>
+      {/* <h1>{myName}</h1> */}
       <MyComponent/>
      
     </>
