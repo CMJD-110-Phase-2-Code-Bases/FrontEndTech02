@@ -1,6 +1,16 @@
 import Table from 'react-bootstrap/Table';
+import { getCourseMaterialData } from "../service/CourseMaterialService"
+import { useEffect } from 'react';
 
 export const  CourseMaterial = ()=> {
+
+    useEffect(()=>{
+      const loadData = async ()=>{
+          const  importedData = await getCourseMaterialData();
+          console.log(importedData)
+      };
+      loadData();
+    },[])
     return(
         <>
           <Table striped bordered hover>
