@@ -21,13 +21,15 @@ const tblHeaders : string [] = [
     "Course ID",
 ];
 
-  // const [tblData,setTblData] = useState<CourseMaterialModel | null>(null)
+ const [ material,setMaterial ] = useState<CourseMaterialModel []>([])
+
 
     useEffect(()=>{
       const loadData = async ()=>{
           const  importedData = await getCourseMaterialData();
           console.log(importedData)
-          // setTblData(importedData)
+          setMaterial(importedData);
+
       };
       loadData();
     },[])
@@ -39,28 +41,25 @@ const tblHeaders : string [] = [
             {tblHeaders.map((headings,index)=> (
                 <th key={index}>{headings}</th>
             ))}
-
         </tr>
       </thead>
       <tbody>
-             <tr>
-               <td></td>
-               
-              </tr>    
+      {material.map((mat,index) =>(
+          <tr key={index}>
+              <td>{mat.courseId}</td>
+              <td>{mat.fileName}</td>
+              <td>{mat.materialType}</td>
+              <td>TBImpl</td>
+              <td>{mat.uploadAt}</td>
+              <td>{mat.courseId}</td>
 
+          </tr>
+      ))}
 
+         {/*<tr>*/}
+         {/*    <td></td>*/}
+         {/*</tr>*/}
 
-
-
-
-        {/* <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-        </tr> */}
       </tbody>
     </Table>
         </>
