@@ -21,13 +21,13 @@ const tblHeaders : string [] = [
     "Course ID",
 ];
 
-  const [tblData,setTblData] = useState<CourseMaterialModel | null>(null)
+  // const [tblData,setTblData] = useState<CourseMaterialModel | null>(null)
 
     useEffect(()=>{
       const loadData = async ()=>{
           const  importedData = await getCourseMaterialData();
           console.log(importedData)
-          setTblData(importedData)
+          // setTblData(importedData)
       };
       loadData();
     },[])
