@@ -3,10 +3,10 @@ import { getCourseMaterialData } from "../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
 
 interface CourseMaterialModel{
-    materialId?: string;   // optional, because backend generates it
+    materialId?: string;
     fileName: string;
     materialType: string;
-    material: File | null;   // base64 string
+    material: File | null;
     uploadAt: string;
     courseId: string;
 }
@@ -49,7 +49,13 @@ const tblHeaders : string [] = [
               <td>{mat.courseId}</td>
               <td>{mat.fileName}</td>
               <td>{mat.materialType}</td>
-              <td>TBImpl</td>
+              <td>
+                  <img
+                      src={`data:image/png;base64,${mat.material}`}
+                      alt="course material"
+                      style={{width:"80px",height:"auto"}}
+                  />
+              </td>
               <td>{mat.uploadAt}</td>
               <td>{mat.courseId}</td>
 
