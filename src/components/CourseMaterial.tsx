@@ -1,13 +1,33 @@
 import Table from 'react-bootstrap/Table';
 import { getCourseMaterialData } from "../service/CourseMaterialService"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+interface CourseMaterialModel{
+    materialId?: string;   // optional, because backend generates it
+    fileName: string;
+    materialType: string;
+    material: File | null;   // base64 string
+    uploadAt: string;
+    courseId: string;
+}
 
 export const  CourseMaterial = ()=> {
+const tblHeaders : string [] = [
+    "Material ID",
+    "File Name",
+    "Material Type",
+    "Material",
+    "Upload At",
+    "Course ID",
+];
+
+  const [tblData,setTblData] = useState<CourseMaterialModel | null>(null)
 
     useEffect(()=>{
       const loadData = async ()=>{
           const  importedData = await getCourseMaterialData();
           console.log(importedData)
+          setTblData(importedData)
       };
       loadData();
     },[])
@@ -16,23 +36,31 @@ export const  CourseMaterial = ()=> {
           <Table striped bordered hover>
       <thead>
         <tr>
-          <th>Material ID</th>
-          <th>File Name</th>
-          <th>Material Type</th>
-          <th>Material</th>
-          <th>Upload At</th>
-          <th>Course ID</th>
+            {tblHeaders.map((headings,index)=> (
+                <th key={index}>{headings}</th>
+            ))}
+
         </tr>
       </thead>
       <tbody>
-        <tr>
+             <tr>
+               <td></td>
+               
+              </tr>    
+
+
+
+
+
+
+        {/* <tr>
           <td>1</td>
           <td>Mark</td>
           <td>Otto</td>
           <td>@mdo</td>
           <td>@mdo</td>
           <td>@mdo</td>
-        </tr>
+        </tr> */}
       </tbody>
     </Table>
         </>
