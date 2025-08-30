@@ -1,6 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import { getCourseMaterialData } from "../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
+import {Button} from "react-bootstrap";
 
 interface CourseMaterialModel{
     materialId?: string;
@@ -19,6 +20,7 @@ const tblHeaders : string [] = [
     "Material",
     "Upload At",
     "Course ID",
+    "Options",
 ];
 
  const [ material,setMaterial ] = useState<CourseMaterialModel []>([])
@@ -29,7 +31,6 @@ const tblHeaders : string [] = [
           const  importedData = await getCourseMaterialData();
           console.log(importedData)
           setMaterial(importedData);
-
       };
       loadData();
     },[])
@@ -58,14 +59,15 @@ const tblHeaders : string [] = [
               </td>
               <td>{mat.uploadAt}</td>
               <td>{mat.courseId}</td>
+              <td>
+                  <Button
+                  className="btn-warning"
+                  style={{ marginRight: "10px"}}
+                  >Update</Button>
+              </td>
 
           </tr>
       ))}
-
-         {/*<tr>*/}
-         {/*    <td></td>*/}
-         {/*</tr>*/}
-
       </tbody>
     </Table>
         </>
