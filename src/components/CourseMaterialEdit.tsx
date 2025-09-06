@@ -1,20 +1,33 @@
 import {Button, Form, Modal} from "react-bootstrap"
 import {useState} from "react";
+import { CourseMaterialModel } from "../model/CourseMaterialModel";
 
-export const CourseMaterialEdit = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+interface CourseMaterialEditProps {
+    show: boolean;
+    selectedRow : CourseMaterialModel | null
+    handleOnClose : () => void
+    updateCourseMaterial : (formData : FormData) => Promise<void>
+    handleOnUpdate : (updateMaterial :CourseMaterialModel) => void
+}
+export const CourseMaterialEdit = ({
+    show,
+    selectedRow,
+    handleOnClose,
+    updateCourseMaterial ,
+    handleOnUpdate 
+}:CourseMaterialEditProps) => {
+    // const [show, setShow] = useState(false);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
-    const handleOnUpdate = ()=>{
-        setShow(true);
-    }
+
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary">
             Launch demo modal
-        </Button><Modal show={show} onHide={handleClose}>
+        </Button> */}
+        <Modal show={show}>
             <Modal.Header closeButton>
                 <Modal.Title>Update Course Material</Modal.Title>
             </Modal.Header>

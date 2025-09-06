@@ -2,15 +2,9 @@ import Table from 'react-bootstrap/Table';
 import { getCourseMaterialData } from "../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
 import {Button} from "react-bootstrap";
+import { CourseMaterialModel } from "../model/CourseMaterialModel";
+import { CourseMaterialEdit } from './CourseMaterialEdit';
 
-interface CourseMaterialModel{
-    materialId?: string;
-    fileName: string;
-    materialType: string;
-    material: File | null;
-    uploadAt: string;
-    courseId: string;
-}
 
 export const  CourseMaterial = ()=> {
 const tblHeaders : string [] = [
@@ -76,6 +70,12 @@ const tblHeaders : string [] = [
       ))}
       </tbody>
     </Table>
+{/* update data handle */}
+  <CourseMaterialEdit
+  
+  
+  
+  />
         </>
     );
 }
