@@ -2,7 +2,7 @@ export interface CourseMaterialModel{
     materialId?: string;
     fileName: string;
     materialType: string;
-    material: File | string;
+    material: string | File;
     uploadAt: string;
     courseId: string;
 }

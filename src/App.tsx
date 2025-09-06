@@ -5,14 +5,23 @@ import {NavBar} from '../src/components/NavBar'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CourseMaterial } from './components/CourseMaterial';
+import { BrowserRouter,Routes, Route} from "react-router";
+import { Course } from './components/Course';
 
 
 function App() {
 
   return (
     <>
-      <NavBar/>
-      <CourseMaterial/>
+    <BrowserRouter>
+       <NavBar/>
+        <Routes>
+           <Route path='/coursematerial' element={ <CourseMaterial/>}/>
+           <Route path='/course' element={ <Course/>}/>
+        </Routes>
+    </BrowserRouter>
+  
+      {/* <CourseMaterial/> */}
     </>
     
   );

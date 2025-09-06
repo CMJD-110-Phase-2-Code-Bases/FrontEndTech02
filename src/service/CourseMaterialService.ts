@@ -13,9 +13,16 @@ export const getCourseMaterialData = async ()=>{
   }
 }
 
+
 export const updateCourseMaterialData = async (material: FormData) =>{
+  console.log("Material is: ",material)
+  
   try{
-    await axios.patch(`${baseURL}`,material)
+    await axios.patch(`${baseURL}`,material,{
+      headers:{
+         "Content-Type" :"multipart/form-data"
+      }
+    })
 
   }catch(er){
     console.log(er)
