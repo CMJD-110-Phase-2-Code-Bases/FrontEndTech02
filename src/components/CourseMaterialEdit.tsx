@@ -1,5 +1,5 @@
 import {Button, Form, Modal} from "react-bootstrap"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
 
 interface CourseMaterialEditProps {
@@ -16,9 +16,21 @@ export const CourseMaterialEdit = ({
     updateCourseMaterial ,
     handleOnUpdate 
 }:CourseMaterialEditProps) => {
-    // const [show, setShow] = useState(false);
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
+ 
+    const [material,setMaterial] = useState<CourseMaterialModel>({
+        materialId: "",
+        fileName: "",
+        materialType: "",
+        material: "",
+        uploadAt: "",
+        courseId: ""
+    })
+
+    useEffect(()=>{
+       if(selectedRow){
+           setMaterial({...selectedRow});
+       }
+    },[selectedRow]);
 
 
 
@@ -27,31 +39,54 @@ export const CourseMaterialEdit = ({
             {/* <Button variant="primary">
             Launch demo modal
         </Button> */}
-        <Modal show={show}>
+        <Modal show={show} onHide={handleOnClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Update Course Material</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="materialId">
                         <Form.Label>Course Material ID</Form.Label>
-                        <Form.Control type="text" readOnly/>
+                        <Form.Control 
+                        type="text" 
+                        readOnly
+                        name="materialId"
+                        value={material.materialId}
+                        
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="fileName">
                         <Form.Label>File Name</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control 
+                        type="text" 
+                        name="fileName"
+                        value={material.fileName}
+
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="materialType">
                         <Form.Label>Material Type</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control 
+                        type="text" 
+                        name="materialType"
+                        value={material.materialType}
+
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="material">
                         <Form.Label>Material</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control 
+                        type="text" 
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="courseId">
                         <Form.Label>Course ID</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control 
+                        type="text" 
+                        name="courseId"
+                        value={material.courseId}
+
+                        />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Update
