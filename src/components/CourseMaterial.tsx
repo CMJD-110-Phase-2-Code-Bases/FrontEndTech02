@@ -34,6 +34,10 @@ const tblHeaders : string [] = [
       };
       loadData();
     },[])
+    //handle edit form
+    const handleOnEdit  = (mat: CourseMaterialModel) =>{
+        console.log(mat)
+    }
     return(
         <>
           <Table striped bordered hover>
@@ -47,7 +51,7 @@ const tblHeaders : string [] = [
       <tbody>
       {material.map((mat,index) =>(
           <tr key={index}>
-              <td>{mat.courseId}</td>
+              <td>{mat.materialId}</td>
               <td>{mat.fileName}</td>
               <td>{mat.materialType}</td>
               <td>
@@ -63,6 +67,8 @@ const tblHeaders : string [] = [
                   <Button
                   className="btn-warning"
                   style={{ marginRight: "10px"}}
+                  onClick={()=>  handleOnEdit(mat)
+                }
                   >Update</Button>
               </td>
 
