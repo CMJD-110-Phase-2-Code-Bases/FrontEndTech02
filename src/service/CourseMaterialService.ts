@@ -13,6 +13,15 @@ export const getCourseMaterialData = async ()=>{
   }
 }
 
+export const updateCourseMaterialData = async (material: FormData) =>{
+  try{
+    await axios.patch(`${baseURL}`,material)
+
+  }catch(er){
+    console.log(er)
+  }
+}
+
 
 
 

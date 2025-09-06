@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import { getCourseMaterialData } from "../service/CourseMaterialService"
+import { getCourseMaterialData,updateCourseMaterialData } from "../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
 import {Button} from "react-bootstrap";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
@@ -18,7 +18,8 @@ const tblHeaders : string [] = [
 ];
 
  const [ material,setMaterial ] = useState<CourseMaterialModel []>([])
-
+ const [ showEditForm, setShowEditForm] = useState(false);
+ const [ selectedRow, setSelectedRow] = useState<CourseMaterialModel | null>(null);
 
     useEffect(()=>{
       const loadData = async ()=>{
@@ -30,7 +31,12 @@ const tblHeaders : string [] = [
     },[])
     //handle edit form
     const handleOnEdit  = (mat: CourseMaterialModel) =>{
-        console.log(mat)
+        setShowEditForm(true)
+        setSelectedRow(mat)
+    }
+    //after update
+    const handleOnUpdate = () =>{
+
     }
     return(
         <>
@@ -72,9 +78,11 @@ const tblHeaders : string [] = [
     </Table>
 {/* update data handle */}
   <CourseMaterialEdit
-  
-  
-  
+     show = {showEditForm}
+     selectedRow={selectedRow}
+     handleOnClose={()=> setShowEditForm(false)}
+     updateCourseMaterial={updateCourseMaterialData}
+     handleOnUpdate={handleOnUpdate} 
   />
         </>
     );
