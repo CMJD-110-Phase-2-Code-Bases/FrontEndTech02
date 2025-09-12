@@ -1,5 +1,5 @@
 export interface CourseMaterialModel{
-    materialId?: string;
+    materialId: string;
     fileName: string;
     materialType: string;
     material: string | File;

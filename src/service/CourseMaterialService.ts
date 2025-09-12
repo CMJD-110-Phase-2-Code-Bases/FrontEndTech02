@@ -14,19 +14,20 @@ export const getCourseMaterialData = async ()=>{
 }
 
 
-export const updateCourseMaterialData = async (material: FormData) =>{
+export const updateCourseMaterialData = async (material: FormData, matId: string) =>{
   console.log("Material is: ",material)
   
-  try{
-    await axios.patch(`${baseURL}`,material,{
-      headers:{
-         "Content-Type" :"multipart/form-data"
-      }
-    })
-
-  }catch(er){
-    console.log(er)
-  }
+  try {
+    const response = await axios.patch(`${baseURL}/${matId}`, material, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+    return response.data;
+} catch (err) {
+    console.error("Error uploading material:", err);
+    throw err;
+}
 }
 
 
