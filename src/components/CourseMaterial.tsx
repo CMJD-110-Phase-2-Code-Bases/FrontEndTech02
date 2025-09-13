@@ -38,14 +38,6 @@ const tblHeaders : string [] = [
         setShowEditForm(true)
         setSelectedRow(mat)
     }
-    //after update
-    const handleOnUpdate = (updatedMat: CourseMaterialModel) => {
-        setMaterial((prev) =>
-            prev.map((m) => (m.materialId === updatedMat.materialId ? updatedMat : m))
-        );
-    };
-
-
     return(
         <>
         <div>
