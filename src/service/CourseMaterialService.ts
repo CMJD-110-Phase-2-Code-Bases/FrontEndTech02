@@ -27,8 +27,18 @@ export const updateCourseMaterialData = async (material: FormData, matId: string
 } catch (err) {
     console.error("Error uploading material:", err);
     throw err;
+  }
 }
-}
+
+export const deleteCourseMaterialData = async (matId: string) =>{    
+    try {
+      const response = await axios.delete(`${baseURL}/${matId}`) 
+      return response.data;
+  } catch (err) {
+      console.error("Error delete material:", err);
+      throw err;
+    }
+  }
 
 export const addCourseMaterialData = async(material: FormData) =>{
     try{
@@ -36,7 +46,8 @@ export const addCourseMaterialData = async(material: FormData) =>{
         return response.data
 
     }catch(err){
-        console.error(err)
+        console.error("Error save material:", err);
+        throw err
     }
 }
 

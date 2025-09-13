@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import { getCourseMaterialData,updateCourseMaterialData,addCourseMaterialData} from "../service/CourseMaterialService"
+import { getCourseMaterialData, updateCourseMaterialData, addCourseMaterialData, deleteCourseMaterialData} from "../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
 import {Button} from "react-bootstrap";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
@@ -38,6 +38,16 @@ const tblHeaders : string [] = [
         setShowEditForm(true)
         setSelectedRow(mat)
     }
+    //handle delete
+    const handleOnDelete = async (materialId: string)=>{
+         try{
+           await deleteCourseMaterialData(materialId)
+           alert("Material deleted...")
+           loadData();  
+         }catch(err){
+             console.error("Delete falied",err);
+         }
+    }
     return(
         <>
         <div>
@@ -75,7 +85,10 @@ const tblHeaders : string [] = [
                   style={{ marginRight: "10px"}}
                   onClick={()=>  handleOnEdit(mat)
                 }
-                  >Update</Button>
+                  >Update
+                  </Button>
+                  <Button variant="danger" onClick={()=> handleOnDelete(mat.materialId)}>Delete</Button>
+
               </td>
 
           </tr>
