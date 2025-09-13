@@ -3,7 +3,8 @@ import { getCourseMaterialData,updateCourseMaterialData } from "../service/Cours
 import { useEffect, useState } from 'react';
 import {Button} from "react-bootstrap";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
-import { CourseMaterialEdit } from './CourseMaterialEdit';
+import CourseMaterialEdit from './CourseMaterialEdit';
+
 
 
 export const  CourseMaterial = ()=> {
