@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
@@ -9,14 +9,14 @@ interface CourseMaterialAddProps {
     show: boolean;
     handleOnClose: () => void;
     addCourseMaterialData: (formData: FormData) => Promise<void>;
-    handleOnAdd: (updatedMaterial: CourseMaterialModel) => void;
+    loadData: ()=> void;
 }
 
 const CourseMaterialAdd = ({
                                 show,
                                 handleOnClose,
                                 addCourseMaterialData,
-                                handleOnAdd,
+                                loadData
                             }: CourseMaterialAddProps) => {
     const [material, setMaterial] = useState<CourseMaterialModel>({
         materialId: "",
@@ -61,7 +61,7 @@ const CourseMaterialAdd = ({
 
         try {
             await addCourseMaterialData(formData);
-            handleOnAdd(material);
+            loadData()
             handleOnClose();
         } catch (error) {
             console.error("Failed to update material:", error);

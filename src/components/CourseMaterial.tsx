@@ -24,14 +24,15 @@ const tblHeaders : string [] = [
  const [ showAddForm, setShowAddForm] = useState(false);
  const [ selectedRow, setSelectedRow] = useState<CourseMaterialModel | null>(null);
 
+ const loadData = async () => {
+    const courseMatData = await getCourseMaterialData();
+    setMaterial(courseMatData);
+  };
+
     useEffect(()=>{
-      const loadData = async ()=>{
-          const  importedData = await getCourseMaterialData();
-          console.log(importedData)
-          setMaterial(importedData);
-      };
       loadData();
     },[])
+    
     //handle edit form
     const handleOnEdit  = (mat: CourseMaterialModel) =>{
         setShowEditForm(true)
@@ -43,12 +44,6 @@ const tblHeaders : string [] = [
             prev.map((m) => (m.materialId === updatedMat.materialId ? updatedMat : m))
         );
     };
-
-    //after on add
-    const handleOnAdd = (newCourseMaterial : CourseMaterialModel)=>{
-        setMaterial((prev)=> [...prev,newCourseMaterial])
-    }
-
 
 
     return(
@@ -101,7 +96,7 @@ const tblHeaders : string [] = [
      selectedRow={selectedRow}
      handleOnClose={()=> setShowEditForm(false)}
      updateCourseMaterial={updateCourseMaterialData}
-     handleOnUpdate={handleOnUpdate} 
+     loadData={()=> loadData()}
   />
 
   {/* add data handle */}
@@ -109,7 +104,7 @@ const tblHeaders : string [] = [
      show = {showAddForm}
      handleOnClose={()=> setShowAddForm(false)}
      addCourseMaterialData={addCourseMaterialData}
-     handleOnAdd={handleOnAdd} 
+     loadData={()=> loadData()}
   />
 
 </>

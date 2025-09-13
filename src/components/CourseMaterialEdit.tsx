@@ -10,7 +10,7 @@ interface CourseMaterialEditProps {
     selectedRow: CourseMaterialModel | null;
     handleOnClose: () => void;
     updateCourseMaterial: (formData: FormData, matId: string) => Promise<void>;
-    handleOnUpdate: (updatedMaterial: CourseMaterialModel) => void;
+    loadData: ()=>void;
 }
 
 const CourseMaterialEdit = ({
@@ -18,7 +18,7 @@ const CourseMaterialEdit = ({
                                 selectedRow,
                                 handleOnClose,
                                 updateCourseMaterial,
-                                handleOnUpdate,
+                                loadData,
                             }: CourseMaterialEditProps) => {
     const [material, setMaterial] = useState<CourseMaterialModel>({
         materialId: "",
@@ -70,7 +70,7 @@ const CourseMaterialEdit = ({
 
         try {
             await updateCourseMaterial(formData,matId);
-            handleOnUpdate(material);
+            loadData();
             handleOnClose();
         } catch (error) {
             console.error("Failed to update material:", error);
