@@ -36,9 +36,11 @@ const tblHeaders : string [] = [
         setSelectedRow(mat)
     }
     //after update
-    const handleOnUpdate = () =>{
-
-    }
+    const handleOnUpdate = (updatedMat: CourseMaterialModel) => {
+        setMaterial((prev) =>
+            prev.map((m) => (m.materialId === updatedMat.materialId ? updatedMat : m))
+        );
+    };
     return(
         <>
           <Table striped bordered hover>
