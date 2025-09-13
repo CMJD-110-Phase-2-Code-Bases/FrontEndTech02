@@ -5,21 +5,19 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
 
-interface CourseMaterialEditProps {
+interface CourseMaterialAddProps {
     show: boolean;
-    selectedRow: CourseMaterialModel | null;
     handleOnClose: () => void;
-    updateCourseMaterial: (formData: FormData, matId: string) => Promise<void>;
-    handleOnUpdate: (updatedMaterial: CourseMaterialModel) => void;
+    addCourseMaterialData: (formData: FormData) => Promise<void>;
+    handleOnAdd: (updatedMaterial: CourseMaterialModel) => void;
 }
 
-const CourseMaterialEdit = ({
+const CourseMaterialAdd = ({
                                 show,
-                                selectedRow,
                                 handleOnClose,
-                                updateCourseMaterial,
-                                handleOnUpdate,
-                            }: CourseMaterialEditProps) => {
+                                addCourseMaterialData,
+                                handleOnAdd,
+                            }: CourseMaterialAddProps) => {
     const [material, setMaterial] = useState<CourseMaterialModel>({
         materialId: "",
         fileName: "",
@@ -28,10 +26,6 @@ const CourseMaterialEdit = ({
         uploadAt: "",
         courseId: "",
     });
-
-    useEffect(() => {
-        if (selectedRow) setMaterial({ ...selectedRow });
-    }, [selectedRow]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -45,17 +39,14 @@ const CourseMaterialEdit = ({
         }
     };
 
-    const handleOnSaveUpdateData = async () => {
+    const hanldeOnSubmit = async () => {
         if (!material.material) {
             alert("Please select a file!");
             return;
         }
 
         const formData = new FormData();
-        const matId = material.materialId
-        
-        if (material.materialId) 
-        formData.append("materialId", material.materialId);
+
         formData.append("fileName", material.fileName);
         formData.append("materialType", material.materialType);
 
@@ -69,8 +60,8 @@ const CourseMaterialEdit = ({
         formData.append("courseId", material.courseId);
 
         try {
-            await updateCourseMaterial(formData,matId);
-            handleOnUpdate(material);
+            await addCourseMaterialData(formData);
+            handleOnAdd(material);
             handleOnClose();
         } catch (error) {
             console.error("Failed to update material:", error);
@@ -80,38 +71,48 @@ const CourseMaterialEdit = ({
     return (
         <Modal show={show} onHide={handleOnClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Material</Modal.Title>
+                <Modal.Title>Add Material</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form noValidate>
                     <Form.Group as={Col} md="10" className="mb-3">
-                        <Form.Label>Material Id:</Form.Label>
-                        <Form.Control type="text" name="materialId" value={material.materialId} readOnly />
-                    </Form.Group>
-
-                    <Form.Group as={Col} md="10" className="mb-3">
                         <Form.Label>File name:</Form.Label>
-                        <Form.Control type="text" name="fileName" value={material.fileName} onChange={handleChange} />
+                        <Form.Control type="text" 
+                        name="fileName" 
+                        value={material.fileName}
+                         onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group as={Col} md="10" className="mb-3">
                         <Form.Label>Material Type:</Form.Label>
-                        <Form.Control type="text" name="materialType" value={material.materialType} onChange={handleChange} />
+                        <Form.Control type="text" 
+                        name="materialType" 
+                        value={material.materialType} 
+                        onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group as={Col} md="10" className="mb-3">
                         <Form.Label>Material File:</Form.Label>
-                        <Form.Control type="file" onChange={handleFileChange} />
+                        <Form.Control
+                         type="file" 
+                        onChange={handleFileChange} />
                     </Form.Group>
 
                     <Form.Group as={Col} md="10" className="mb-3">
                         <Form.Label>Upload At:</Form.Label>
-                        <Form.Control type="text" name="uploadAt" value={material.uploadAt} onChange={handleChange} />
+                        <Form.Control type="text" 
+                        name="uploadAt" 
+                        value={material.uploadAt} 
+                        onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group as={Col} md="10" className="mb-3">
                         <Form.Label>Course Id:</Form.Label>
-                        <Form.Control type="text" name="courseId" value={material.courseId} onChange={handleChange} />
+                        <Form.Control 
+                         type="text"
+                         name="courseId" 
+                         value={material.courseId} 
+                         onChange={handleChange} />
                     </Form.Group>
                 </Form>
             </Modal.Body>
@@ -119,12 +120,12 @@ const CourseMaterialEdit = ({
                 <Button variant="danger" onClick={handleOnClose}>
                     Close
                 </Button>
-                <Button variant="success" onClick={handleOnSaveUpdateData}>
-                    Update
+                <Button variant="primary" onClick={hanldeOnSubmit}>
+                    Add
                 </Button>
             </Modal.Footer>
         </Modal>
     );
 };
 
-export default CourseMaterialEdit;
+export default CourseMaterialAdd;

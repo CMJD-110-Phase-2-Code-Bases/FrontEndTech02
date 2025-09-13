@@ -1,9 +1,10 @@
 import Table from 'react-bootstrap/Table';
-import { getCourseMaterialData,updateCourseMaterialData } from "../service/CourseMaterialService"
+import { getCourseMaterialData,updateCourseMaterialData,addCourseMaterialData} from "../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
 import {Button} from "react-bootstrap";
 import { CourseMaterialModel } from "../model/CourseMaterialModel";
 import CourseMaterialEdit from './CourseMaterialEdit';
+import CourseMaterialAdd from './CourseMaterialAdd';
 
 
 
@@ -20,6 +21,7 @@ const tblHeaders : string [] = [
 
  const [ material,setMaterial ] = useState<CourseMaterialModel []>([])
  const [ showEditForm, setShowEditForm] = useState(false);
+ const [ showAddForm, setShowAddForm] = useState(false);
  const [ selectedRow, setSelectedRow] = useState<CourseMaterialModel | null>(null);
 
     useEffect(()=>{
@@ -41,8 +43,22 @@ const tblHeaders : string [] = [
             prev.map((m) => (m.materialId === updatedMat.materialId ? updatedMat : m))
         );
     };
+
+    //after on add
+    const handleOnAdd = (newCourseMaterial : CourseMaterialModel)=>{
+        setMaterial((prev)=> [...prev,newCourseMaterial])
+    }
+
+
+
     return(
         <>
+        <div>
+            <h1 style={{ textAlign:"center",padding:"10px"}}>Course Material Portal</h1>
+            <Button variant='primary' style={{ position:"absolute",right:"50px",top:"10%"}} onClick={()=> setShowAddForm(true)}>
+                Add
+            </Button>
+        </div>
           <Table striped bordered hover>
       <thead>
         <tr>
@@ -87,6 +103,15 @@ const tblHeaders : string [] = [
      updateCourseMaterial={updateCourseMaterialData}
      handleOnUpdate={handleOnUpdate} 
   />
-        </>
+
+  {/* add data handle */}
+  <CourseMaterialAdd
+     show = {showAddForm}
+     handleOnClose={()=> setShowAddForm(false)}
+     addCourseMaterialData={addCourseMaterialData}
+     handleOnAdd={handleOnAdd} 
+  />
+
+</>
     );
 }

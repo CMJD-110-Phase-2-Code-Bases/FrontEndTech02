@@ -30,6 +30,18 @@ export const updateCourseMaterialData = async (material: FormData, matId: string
 }
 }
 
+export const addCourseMaterialData = async(material: FormData) =>{
+    try{
+        const response = await axios.post(`${baseURL}`,material)
+        return response.data
+
+    }catch(err){
+        console.error(err)
+    }
+}
+
+
+
 
 
 
