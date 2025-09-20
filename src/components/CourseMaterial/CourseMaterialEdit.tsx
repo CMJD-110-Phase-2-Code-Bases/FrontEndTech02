@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
-import { CourseMaterialModel } from "../model/CourseMaterialModel";
+import { CourseMaterialModel } from "../../model/CourseMaterialModel";
 
 interface CourseMaterialEditProps {
     show: boolean;

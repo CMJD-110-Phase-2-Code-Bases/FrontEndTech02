@@ -1,8 +1,8 @@
 import Table from 'react-bootstrap/Table';
-import { getCourseMaterialData, updateCourseMaterialData, addCourseMaterialData, deleteCourseMaterialData} from "../service/CourseMaterialService"
+import { getCourseMaterialData, updateCourseMaterialData, addCourseMaterialData, deleteCourseMaterialData} from "../../service/CourseMaterialService"
 import { useEffect, useState } from 'react';
 import {Button} from "react-bootstrap";
-import { CourseMaterialModel } from "../model/CourseMaterialModel";
+import { CourseMaterialModel } from "../../model/CourseMaterialModel";
 import CourseMaterialEdit from './CourseMaterialEdit';
 import CourseMaterialAdd from './CourseMaterialAdd';
 
