@@ -1,5 +1,36 @@
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
+import { Interface } from "readline";
 export const SignUp = () => {
+
+  interface SignUp{
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: string;
+  }  
+
+  //state handle
+  const [user,setUser]  = useState<SignUp>({
+      firstName:"",
+      lastName:"",
+      email:"",
+      password:"",
+      role:"",
+  })  
+
+
+  //form data handle
+  const handleOnChange = ()=>{
+
+  }
+
+
+ // send sign updata to the server
+  const handleOnSubmit = ()=>{
+     
+  }  
   return (
     <>
     <h1 style={{textAlign:"center"}}>Register</h1>
