@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Interface } from "readline";
 export const SignUp = () => {
@@ -22,24 +23,30 @@ export const SignUp = () => {
 
 
   //form data handle
-  const handleOnChange = ()=>{
+  const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const {name, value} = e.target;
+    setUser((prev)=> ({...prev, [name]:value}))
 
   }
 
 
  // send sign updata to the server
-  const handleOnSubmit = ()=>{
-     
+  const handleOnSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+     e.preventDefault()
+     console.log(user)
   }  
   return (
     <>
     <h1 style={{textAlign:"center"}}>Register</h1>
-    <Form className="d-flex flex-column align-items-center mt-5">
+    <Form className="d-flex flex-column align-items-center mt-5" onSubmit={handleOnSubmit}>
         <Form.Group className="mb-3" controlId="formGroupFirstName">
           <Form.Label>First Name</Form.Label>
           <Form.Control 
            type="text"
            placeholder="Enter First Name" 
+           value={user.firstName}
+           name="firstName"
+           onChange={handleOnChange}
            />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupLastName">
@@ -47,6 +54,9 @@ export const SignUp = () => {
           <Form.Control
            type="text"
            placeholder="Enter Last Name" 
+           value={user.lastName}
+           name="lastName"
+           onChange={handleOnChange}
         />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -54,6 +64,10 @@ export const SignUp = () => {
           <Form.Control
            type="email"
            placeholder="Enter email" 
+           value={user.email}
+           name="email"
+           onChange={handleOnChange}
+           
         />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -61,6 +75,9 @@ export const SignUp = () => {
           <Form.Control 
            type="password"
            placeholder="Enter Password" 
+           value={user.password}
+           name="password"
+           onChange={handleOnChange}
            />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupRole">
@@ -68,8 +85,13 @@ export const SignUp = () => {
           <Form.Control 
            type="text"
            placeholder="Enter Role" 
+           value={user.role}
+           name="role"
+           onChange={handleOnChange}
            />
         </Form.Group>
+        <Button variant="success" type="submit">SignUp</Button>
+        <Button variant="danger" type="reset">Reset</Button>
         
       </Form>
     </>
