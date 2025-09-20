@@ -27,8 +27,6 @@ function App() {
         </Routes>
     </BrowserRouter>
     </AuthProvider>
-  
-      {/* <CourseMaterial/> */}
     </>
     
   );

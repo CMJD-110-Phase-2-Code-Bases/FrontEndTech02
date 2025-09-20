@@ -3,9 +3,19 @@ import axios from 'axios';
 // const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
 const baseURL = "http://localhost:8044/courseregis/api/v1/material";
 
+// get Token
+const getToken = ()=>{
+  const token = localStorage.getItem("authToken")
+  return "Bearer "+token
+}
+
 export const getCourseMaterialData = async ()=>{
   try{
-   const response =  await axios.get(`${baseURL}`)
+   const response =  await axios.get(`${baseURL}`,{
+     headers:{
+       "Authorization": getToken()
+     }
+   })
    return response.data;
 
   }catch(err){
@@ -21,6 +31,7 @@ export const updateCourseMaterialData = async (material: FormData, matId: string
     const response = await axios.patch(`${baseURL}/${matId}`, material, {
         headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": getToken()
         },
     });
     return response.data;
@@ -32,7 +43,11 @@ export const updateCourseMaterialData = async (material: FormData, matId: string
 
 export const deleteCourseMaterialData = async (matId: string) =>{    
     try {
-      const response = await axios.delete(`${baseURL}/${matId}`) 
+      const response = await axios.delete(`${baseURL}/${matId}`,{
+        headers:{
+          "Authorization": getToken()
+        }
+      }) 
       return response.data;
   } catch (err) {
       console.error("Error delete material:", err);
@@ -42,7 +57,11 @@ export const deleteCourseMaterialData = async (matId: string) =>{
 
 export const addCourseMaterialData = async(material: FormData) =>{
     try{
-        const response = await axios.post(`${baseURL}`,material)
+        const response = await axios.post(`${baseURL}`,material,{
+          headers:{
+            "Authorization": getToken()
+          }
+        })
         return response.data
 
     }catch(err){
