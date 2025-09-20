@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { Interface } from "readline";
 export const SignUp = () => {
 
   interface SignUp{
@@ -90,9 +89,7 @@ export const SignUp = () => {
            onChange={handleOnChange}
            />
         </Form.Group>
-        <Button variant="success" type="submit">SignUp</Button>
-        <Button variant="danger" type="reset">Reset</Button>
-        
+        <Button variant="success" type="submit">SignUp</Button>       
       </Form>
     </>
   );
