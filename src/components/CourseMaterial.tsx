@@ -87,7 +87,10 @@ const tblHeaders : string [] = [
                 }
                   >Update
                   </Button>
-                  <Button variant="danger" onClick={()=> handleOnDelete(mat.materialId)}>Delete</Button>
+                  <Button variant="danger" 
+                  onClick={()=> handleOnDelete(mat.materialId)}
+                  >Delete
+                  </Button>
 
               </td>
 

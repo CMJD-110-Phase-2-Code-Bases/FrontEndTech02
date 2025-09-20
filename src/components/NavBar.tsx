@@ -8,7 +8,7 @@ export const NavBar = ()=>{
         <>
          <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand as={Link} to="/">Course</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/coursematerial">Course Material</Nav.Link>
             <Nav.Link as={Link} to="/course">Course</Nav.Link>
