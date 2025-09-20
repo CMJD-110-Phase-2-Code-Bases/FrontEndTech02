@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { SignUpProcess } from "../../service/AuthService";
+import { useAuth } from "./AuthProvider";
+import { useNavigate } from "react-router";
 export const SignUp = () => {
 
   interface SignUp{
@@ -11,6 +13,10 @@ export const SignUp = () => {
     password: string;
     role: string;
   }  
+ 
+
+  const navigate = useNavigate()
+  const { login } = useAuth();
 
   //state handle
   const [user,setUser]  = useState<SignUp>({
@@ -35,7 +41,10 @@ export const SignUp = () => {
      e.preventDefault()
      const token = await SignUpProcess(user)
      console.log(token)
+     login(token)
+     navigate("/coursematerial")
   }  
+
   return (
     <>
     <h1 style={{textAlign:"center"}}>Register</h1>

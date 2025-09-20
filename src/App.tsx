@@ -9,12 +9,14 @@ import { BrowserRouter,Routes, Route} from "react-router";
 import { Course } from './components/Course/Course';
 import { SignIn } from './components/auth/SignIn';
 import { SignUp } from './components/auth/SignUp';
+import { AuthProvider } from './components/auth/AuthProvider';
 
 
 function App() {
 
   return (
     <>
+    <AuthProvider>
     <BrowserRouter>
        <NavBar/>
         <Routes>
@@ -24,6 +26,7 @@ function App() {
            <Route path='/course' element={ <Course/>}/>
         </Routes>
     </BrowserRouter>
+    </AuthProvider>
   
       {/* <CourseMaterial/> */}
     </>

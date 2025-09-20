@@ -2,6 +2,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { SignInProcess } from "../../service/AuthService";
+import { useAuth } from "./AuthProvider";
 export const SignIn = () => {
 
   interface SignIn{
@@ -13,6 +14,8 @@ export const SignIn = () => {
       email:"",
       password:""
   })  
+  const { login } = useAuth();
+
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
     const {name, value} = e.target;
     setUser((prev)=> ({...prev, [name]:value}))
@@ -21,6 +24,9 @@ export const SignIn = () => {
     e.preventDefault()
     const token = await SignInProcess(user)
     console.log(token)
+    setUser({email:"",password:""})
+    login(token)
+    
 
   }
 
