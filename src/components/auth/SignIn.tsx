@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
+import { SignInProcess } from "../../service/AuthService";
 export const SignIn = () => {
 
   interface SignIn{
@@ -16,9 +17,11 @@ export const SignIn = () => {
     const {name, value} = e.target;
     setUser((prev)=> ({...prev, [name]:value}))
   }
-  const handleOnSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+  const handleOnSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-    console.log(user)
+    const token = await SignInProcess(user)
+    console.log(token)
+
   }
 
   return (
@@ -47,8 +50,8 @@ export const SignIn = () => {
         </Form.Group>
         <Button
         type="submit"
-        variant="success"
-        >Signup</Button>
+        variant="warning"
+        >Login</Button>
       </Form>
     </>
   );

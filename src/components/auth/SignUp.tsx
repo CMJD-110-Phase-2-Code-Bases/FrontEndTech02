@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { SignUpProcess } from "../../service/AuthService";
 export const SignUp = () => {
 
   interface SignUp{
@@ -30,9 +31,10 @@ export const SignUp = () => {
 
 
  // send sign updata to the server
-  const handleOnSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+  const handleOnSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
      e.preventDefault()
-     console.log(user)
+     const token = await SignUpProcess(user)
+     console.log(token)
   }  
   return (
     <>
@@ -89,7 +91,7 @@ export const SignUp = () => {
            onChange={handleOnChange}
            />
         </Form.Group>
-        <Button variant="success" type="submit">SignUp</Button>       
+        <Button variant="success" type="submit">Register</Button>       
       </Form>
     </>
   );
